@@ -6,7 +6,7 @@ const secretMessages = [
   "😂 Tại sao em cứ bấm? Chị đã dặn đừng bấm rồi mà!",
   "🌟 Okay okay, phần thưởng bí mật: Chúc mừng sinh nhật thật vui vẻ nhó!.",
   "💌 Bí mật cuối: I love you so much ~ UwU",
-  "🤫 Xin lỗi, nút này đã hết phần thưởng bí mật. Nhưng phần hay vẫn còn phía sau!",
+  "🤫 Xin lỗi, nút này đã hết phần thưởng bí mật!",
 ];
 
 export function SecretButton() {
