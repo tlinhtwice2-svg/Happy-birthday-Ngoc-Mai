@@ -11,42 +11,6 @@ const letterParagraphs = [
   "— Linh.",
 ];
 
-function useTyping(text: string, speed = 22, started = false) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (!started) {
-      setDisplayed("");
-      setDone(false);
-      return;
-    }
-
-    let isMounted = true;
-    let i = 0;
-    setDisplayed("");
-    setDone(false);
-
-    const interval = setInterval(() => {
-      if (!isMounted) return;
-      if (i < text.length) {
-        setDisplayed(text.slice(0, i + 1));
-        i++;
-      } else {
-        setDone(true);
-        clearInterval(interval);
-      }
-    }, speed);
-
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
-  }, [text, speed, started]);
-
-  return { displayed, done };
-}
-
 function LetterParagraph({ text, delay, active, completed, onDone }: {
   text: string;
   delay: number;
@@ -54,9 +18,12 @@ function LetterParagraph({ text, delay, active, completed, onDone }: {
   completed: boolean;
   onDone: () => void;
 }) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
   const [startTyping, setStartTyping] = useState(false);
-  const { displayed, done } = useTyping(text, 22, startTyping && active);
+  const indexRef = useRef(0);
 
+  // Trigger start typing after delay when active
   useEffect(() => {
     if (active && !startTyping) {
       const t = setTimeout(() => setStartTyping(true), delay);
@@ -64,6 +31,32 @@ function LetterParagraph({ text, delay, active, completed, onDone }: {
     }
   }, [active, delay, startTyping]);
 
+  // Run the typing animation
+  useEffect(() => {
+    if (!active || !startTyping || completed) {
+      return;
+    }
+
+    indexRef.current = 0;
+    setDisplayed("");
+    setDone(false);
+
+    const interval = setInterval(() => {
+      if (indexRef.current < text.length) {
+        setDisplayed(text.slice(0, indexRef.current + 1));
+        indexRef.current++;
+      } else {
+        setDone(true);
+        clearInterval(interval);
+      }
+    }, 22);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [active, startTyping, completed, text]);
+
+  // Trigger onDone when done typing
   useEffect(() => {
     if (active && done && !completed) {
       onDone();
