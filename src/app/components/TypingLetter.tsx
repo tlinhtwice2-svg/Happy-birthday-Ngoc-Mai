@@ -11,16 +11,24 @@ const letterParagraphs = [
   "— Linh.",
 ];
 
-function useTyping(text: string, speed = 28, started = false) {
+function useTyping(text: string, speed = 22, started = false) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (!started) return;
+    if (!started) {
+      setDisplayed("");
+      setDone(false);
+      return;
+    }
+
+    let isMounted = true;
+    let i = 0;
     setDisplayed("");
     setDone(false);
-    let i = 0;
+
     const interval = setInterval(() => {
+      if (!isMounted) return;
       if (i < text.length) {
         setDisplayed(text.slice(0, i + 1));
         i++;
@@ -29,35 +37,43 @@ function useTyping(text: string, speed = 28, started = false) {
         clearInterval(interval);
       }
     }, speed);
-    return () => clearInterval(interval);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, [text, speed, started]);
 
   return { displayed, done };
 }
 
-function LetterParagraph({ text, delay, allPrevDone, onDone, isLast }: {
+function LetterParagraph({ text, delay, active, completed, onDone }: {
   text: string;
   delay: number;
-  allPrevDone: boolean;
+  active: boolean;
+  completed: boolean;
   onDone: () => void;
-  isLast: boolean;
 }) {
   const [startTyping, setStartTyping] = useState(false);
-  const { displayed, done } = useTyping(text, 22, startTyping);
+  const { displayed, done } = useTyping(text, 22, startTyping && active);
 
   useEffect(() => {
-    if (allPrevDone && !startTyping) {
+    if (active && !startTyping) {
       const t = setTimeout(() => setStartTyping(true), delay);
       return () => clearTimeout(t);
     }
-  }, [allPrevDone, delay, startTyping]);
+  }, [active, delay, startTyping]);
 
   useEffect(() => {
-    if (done) onDone();
-  }, [done, onDone]);
+    if (active && done && !completed) {
+      onDone();
+    }
+  }, [active, done, completed, onDone]);
 
   const isSignature = text.startsWith("—");
-  const isGreeting = text === "Em ơi,";
+  const isGreeting = text === "Mai ơi," || text === "Em ơi,";
+
+  const displayText = completed ? text : displayed;
 
   return (
     <p
@@ -70,8 +86,8 @@ function LetterParagraph({ text, delay, allPrevDone, onDone, isLast }: {
         minHeight: "1.5em",
       }}
     >
-      {displayed}
-      {!done && startTyping && (
+      {displayText}
+      {active && !done && startTyping && (
         <span
           className="inline-block ml-0.5 animate-pulse"
           style={{ width: 2, height: "1em", background: "#C96F88", verticalAlign: "text-bottom", borderRadius: 1 }}
@@ -84,19 +100,15 @@ function LetterParagraph({ text, delay, allPrevDone, onDone, isLast }: {
 export function TypingLetter() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [doneBefore, setDoneBefore] = useState<boolean[]>(new Array(letterParagraphs.length).fill(false));
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const markDone = (i: number) => {
-    setDoneBefore((prev) => {
-      const next = [...prev];
-      next[i] = true;
-      return next;
+  const handleDone = (index: number) => {
+    setActiveIndex((prev) => {
+      if (index === prev) {
+        return prev + 1;
+      }
+      return prev;
     });
-  };
-
-  const prevAllDone = (i: number) => {
-    if (i === 0) return inView;
-    return doneBefore[i - 1];
   };
 
   return (
@@ -171,9 +183,9 @@ export function TypingLetter() {
                 key={i}
                 text={para}
                 delay={i === 0 ? 300 : 200}
-                allPrevDone={prevAllDone(i)}
-                onDone={() => markDone(i)}
-                isLast={i === letterParagraphs.length - 1}
+                active={inView && i === activeIndex}
+                completed={i < activeIndex}
+                onDone={() => handleDone(i)}
               />
             ))}
           </div>
