@@ -12,7 +12,7 @@ const moods = [
     content: [
       { type: "text", value: "Em xứng đáng được vui. Đừng cảm thấy có lỗi vì hạnh phúc." },
       { type: "text", value: "Những ngày em cười nhiều, nhà mình sáng hơn cả một bóng đèn 100W." },
-      { type: "funny", value: "📸 Nhớ chụp ảnh lại để sau này có bằng chứng mà dìm hàng nhau." },
+      { type: "funny", value: "📸 Nhớ chụp ảnh lại để sau này có kỉ niệm để nhớ về." },
       { type: "text", value: "Chúng ta là những chi của đồng một thể. " },
     ],
   },
