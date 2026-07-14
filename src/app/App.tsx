@@ -8,7 +8,6 @@ import { TypingLetter } from "./components/TypingLetter";
 import { SafeSpace } from "./components/SafeSpace";
 import { ClosingPromise } from "./components/ClosingPromise";
 import { SecretButton } from "./components/SecretButton";
-import { AudioPlayer } from "./components/AudioPlayer";
 
 export default function App() {
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
@@ -62,12 +61,7 @@ export default function App() {
         </motion.div>
       )}
 
-      {envelopeOpened && (
-        <>
-          <SecretButton />
-          <AudioPlayer />
-        </>
-      )}
+      {envelopeOpened && <SecretButton />}
     </div>
   );
 }
