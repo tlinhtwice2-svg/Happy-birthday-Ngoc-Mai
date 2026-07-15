@@ -32,7 +32,7 @@ const memories = [
     caption: "Nàng thơ xinh đẹp động lòng người ~",
     emoji: "🌸",
     color: "#F5D5E8",
-    bg:"https://i.postimg.cc/y6hfFNCC/1784050578468-405972921289433378-2453321980956864395-6263ac904bee27de7f4eb89e3139796d.jpg" 
+    bg: "https://i.postimg.cc/3JBcHxtr/1783838567775-6993869936114346127-6993869936114346127-524aedda3993b6e1456f47fb19f69b38.jpg" 
   },
   {
     year: "2024",
