@@ -8,7 +8,7 @@ const memories = [
     caption: "Ngày em chào đời, thế giới có thêm một thiên sứ.",
     emoji: "🍼",
     color: "#F2B5C5",
-    bg: "https://i.postimg.cc/4y2SC85C/1783838456202-6993869936114346127-6993869936114346127-f1fe33ff9974c0409192b51b2e85cab6.jpg",
+    bg: "/Mai/1783838456202_6993869936114346127_6993869936114346127_f1fe33ff9974c0409192b51b2e85cab6.jpg",
   },
   {
     year: "2007",
@@ -16,7 +16,7 @@ const memories = [
     caption: "Đáng yêu và tốt bụng^^",
     emoji: "🖍️",
     color: "#EDD5C0",
-    bg: "https://i.postimg.cc/wBfzxkFs/1783838456308-6993869936114346127-6993869936114346127-660b6b07c4f48c238379e200e7ecce96.jpg" 
+    bg: "/Mai/1783838456308_6993869936114346127_6993869936114346127_660b6b07c4f48c238379e200e7ecce96.jpg",
   },
   {
     year: "2010",
@@ -24,7 +24,7 @@ const memories = [
     caption: "Đôi mắt biết nói...",
     emoji: "🎒",
     color: "#B8D4E3",
-    bg: "https://i.postimg.cc/3JBcHxtr/1783838567775-6993869936114346127-6993869936114346127-524aedda3993b6e1456f47fb19f69b38.jpg",
+    bg: "/Mai/1783838567775_6993869936114346127_6993869936114346127_524aedda3993b6e1456f47fb19f69b38.jpg",
   },
   {
     year: "2023",
@@ -32,7 +32,7 @@ const memories = [
     caption: "Nàng thơ xinh đẹp động lòng người ~",
     emoji: "🌸",
     color: "#F5D5E8",
-    bg: "https://i.postimg.cc/3JBcHxtr/1783838567775-6993869936114346127-6993869936114346127-524aedda3993b6e1456f47fb19f69b38.jpg" 
+    bg: "/Mai/1784050578468_405972921289433378_2453321980956864395_6263ac904bee27de7f4eb89e3139796d.jpg",
   },
   {
     year: "2024",
@@ -40,7 +40,7 @@ const memories = [
     caption: "Thanh xuân rực rỡ nhất, rạng ngời tựa ánh ban mai",
     emoji: "💐",
     color: "#D4E8D0",
-    bg: "https://i.postimg.cc/Ss6G7g59/1784050578371-405972921289433378-2453321980956864395-c04beb160b18084a8611a396f0297823.jpg",
+    bg: "/Mai/1784050578371_405972921289433378_2453321980956864395_c04beb160b18084a8611a396f0297823.jpg",
   },
   {
     year: "2025",
@@ -48,7 +48,7 @@ const memories = [
     caption: "Khi nàng công chúa bước ra khỏi thế giới cổ tích, tỏa sáng rực rỡ nhất giữa đời thường",
     emoji: "✨",
     color: "#C96F88",
-    bg: "https://i.postimg.cc/FsWVZdPw/1784050578286-405972921289433378-2453321980956864395-9f284db9eb0a0d2c512e0c219ba3c296.jpg",
+    bg: "/Mai/1784050578286_405972921289433378_2453321980956864395_9f284db9eb0a0d2c512e0c219ba3c296.jpg",
     highlight: true,
   },
 ];
